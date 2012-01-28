@@ -12,6 +12,7 @@ public class MessageOverlay extends Screen {
 	private String text;
 	
 	public MessageOverlay(String message) {
+		// TODO: convert to a string array for multiple screens
 		text = message;
 	}
 	
@@ -21,6 +22,7 @@ public class MessageOverlay extends Screen {
 		
 		batch.draw(Assets.textbox, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()/3);
 		
+		// TODO: Get the text to wrap
 		Assets.font.setColor(0,0,0,1);
 		Assets.font.setScale(1);
 		Assets.font.drawMultiLine(batch, text, 16, Gdx.graphics.getHeight()/3 - 16);
@@ -49,7 +51,9 @@ public class MessageOverlay extends Screen {
 	// Input processor methods:
 
 	public boolean keyDown(int keycode) {
-
+		
+		// TODO: remove a string from the message array, change the screen to another MessageOverlay with the new array; back to LEVEL is the limiting case.
+		
 		Assets.ding.play();
 		Game.changeScreen(Game.LEVEL);
 

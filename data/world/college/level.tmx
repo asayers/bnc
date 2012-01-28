@@ -4,12 +4,21 @@
  </tileset>
  <layer height="30" name="Background" width="40">
   <data compression="zlib" encoding="base64">
-   eJztlt0KgCAMRmcQGtL7v2540U21zbTmhO/igD+Ix6nTQEQBADA1O1PW+ixIDcDv7rdUAD/4SUi54alu5ddz/yz9soLk92d+KWO2ivXHCf1a5npzB0b4aWcUfvy+efVLBL+RfoVVoef9PGPQki+9/y+5dmuXWfyu50Dyiw5i6C1+X/kdp3sLUg==
+   eJztltEKgCAMRWcgGtH//2740EvlZrPmhPtwQBHxOOc0EFEAAEzNXmlLYxZkBfC7+y0NwA9+HFxteOpb+fXcP0u/TYDz+7O+lDlrw/7ThH6atd7cgRF+Uo7Cr35uXv0ywW+kXyEK9LyfZww09dLz/zIy+7V24fLCk981Dzi/5CCG3uL3ld8Bn0cLTw==
   </data>
  </layer>
  <layer height="30" name="Solid" width="40">
   <data compression="zlib" encoding="base64">
-   eJztlksKwCAMRIXse//jdlOptPGXoVPQGQgIanyJJpiShOgATXziQ/nsGpszrs0x+aL7xLcvH1p3aA2uxjfSG7z+gPJ9lQPx7cMXOcsa5vln8836F9+9T3zr8tnLky+vphl8LCH1G30XtXiZLNl6/brke/5XWDkr1VvzRw5HYxi9B7ZltdacoVQaRw==
+   eJztluEKwCAIhAP/7/0fd38Wi83KeXSD7Q6EoLJPM6kUCdEGmvjEh/LZMTZn3Jtj8mX3iW8dH1rXaI2Lj8sX6Q1ef0D5VuVAfP/hy5xlA/P8s/me+hffuU983+Wzmydf3ptm8LGEvN9sXfTiZbJUm/Xrlu/6X2HlrNVszRs5jMYQvQe2VY3W7BV/G0M=
   </data>
  </layer>
+ <objectgroup height="30" name="NPCs" width="40">
+  <object name="Jing" type="NPC" x="1007" y="814">
+   <properties>
+    <property name="dialogue" value="Hello, and welcome to Brasenose College!\nMany great adventures await you!"/>
+   </properties>
+  </object>
+  <object name="Ned" type="NPC" x="910" y="719"/>
+  <object name="Alex" type="Player" x="1008" y="911"/>
+ </objectgroup>
 </map>

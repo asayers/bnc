@@ -2,6 +2,7 @@ package uk.co.oumu.brasenose.screens;
 
 import uk.co.oumu.brasenose.Assets;
 import uk.co.oumu.brasenose.Game;
+import uk.co.oumu.brasenose.Levels.CollegeLevel;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -115,7 +116,7 @@ public class MenuScreen extends Screen {
 				if(Game.LEVEL!=null) {
 					Game.LEVEL.dispose();
 				}
-				Game.LEVEL = new LevelScreen();
+				Game.LEVEL = new CollegeLevel();
 				Game.changeScreen(Game.LEVEL);
 			}
 			if(selection == 2) {

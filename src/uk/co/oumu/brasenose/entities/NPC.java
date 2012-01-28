@@ -4,7 +4,6 @@ import uk.co.oumu.brasenose.Assets;
 import uk.co.oumu.brasenose.Game;
 import uk.co.oumu.brasenose.screens.MessageOverlay;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -132,13 +131,14 @@ public class NPC extends Actor {
 	
 	@Override
 	public boolean keyDown(int keycode) {
-		if(keycode == Input.Keys.SPACE) {
-			Assets.ding.play();
-			Game.changeScreen(new MessageOverlay(dialogue));
-			return true;
-		}
 		
-		return false;
+		direction = keycode;
+		setSprite();
+		Game.LEVEL.draw();
+		
+		Assets.ding.play();
+		Game.changeScreen(new MessageOverlay(dialogue));
+		return true;
 	}
 
 	@Override

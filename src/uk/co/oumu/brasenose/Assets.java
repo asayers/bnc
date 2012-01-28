@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Assets {
 
+	// TODO: load a custom font
 	public static final BitmapFont font = new BitmapFont();
 	
 	public static final Music music1 = Gdx.audio.newMusic(Gdx.files.internal("data/snd/music1.mp3"));

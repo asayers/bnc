@@ -158,7 +158,7 @@ public class Player extends Actor {
 			// If the target grid square contains an actor, perform actor.keyDown()
 			if(!(ti<0) && !(tj<0) && !(ti+1>Game.LEVEL.width) && !(tj+1>Game.LEVEL.height)) {
 				if(Game.LEVEL.actors[ti][tj] != null) {
-					return Game.LEVEL.actors[ti][tj].keyDown(Input.Keys.SPACE);
+					return Game.LEVEL.actors[ti][tj].keyDown((direction+2)%4);
 				}
 			}
 		}
