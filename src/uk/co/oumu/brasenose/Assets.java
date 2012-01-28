@@ -17,8 +17,8 @@ public class Assets {
 	public static final Texture ui = new Texture(Gdx.files.internal("data/img/ui.png"));
 	public static final Texture npcs = new Texture(Gdx.files.internal("data/img/npcs.png"));
 
-	public static final TextureRegion logo = new TextureRegion(ui, 0,0, 128,64);
-	public static final TextureRegion textbox = new TextureRegion(ui, 0,64, 16,16);
+	public static final TextureRegion logo = new TextureRegion(ui, 0,0, 324,138);
+	public static final TextureRegion textbox = new TextureRegion(ui, 0,138, 16,16);
 	
 	public static final Sound ding = Gdx.audio.newSound(Gdx.files.internal("data/snd/ding.wav"));
 	public static final Sound door = Gdx.audio.newSound(Gdx.files.internal("data/snd/door.wav"));

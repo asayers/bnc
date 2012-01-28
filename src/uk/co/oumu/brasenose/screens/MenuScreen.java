@@ -16,7 +16,7 @@ public class MenuScreen extends Screen {
 	
 	public void drawTitle() {
 		int x = (int)(Gdx.graphics.getWidth()-Assets.logo.getRegionWidth())/2;
-		int y = (int)(Gdx.graphics.getHeight()-Assets.logo.getRegionHeight())*2/3;
+		int y = (int)(Gdx.graphics.getHeight()-Assets.logo.getRegionHeight())*3/4;
 		batch.draw(Assets.logo, x, y);
 	}
 
@@ -32,7 +32,7 @@ public class MenuScreen extends Screen {
 		}
 		
 		int x = (int)(Gdx.graphics.getWidth()-Assets.font.getMultiLineBounds(menutext).width)/2;
-		int y = (int)(Gdx.graphics.getHeight()-Assets.font.getMultiLineBounds(menutext).height)/2;
+		int y = (int)(Gdx.graphics.getHeight()-Assets.font.getMultiLineBounds(menutext).height)*3/7;
 		Assets.font.setColor(0,0,0,1);
 		Assets.font.setScale(1);
 		Assets.font.drawMultiLine(batch, menutext, x, y);
