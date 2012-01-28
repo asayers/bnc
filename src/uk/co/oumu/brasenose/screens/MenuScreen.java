@@ -1,7 +1,7 @@
-package uk.co.oumu.gdxgame.screens;
+package uk.co.oumu.brasenose.screens;
 
-import uk.co.oumu.gdxgame.Assets;
-import uk.co.oumu.gdxgame.Game;
+import uk.co.oumu.brasenose.Assets;
+import uk.co.oumu.brasenose.Game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -70,6 +70,12 @@ public class MenuScreen extends Screen {
 	
 	@Override
 	public void render(float delta) {
+		if(Game.GAME.volumeslider > 0) {
+			Assets.music1.setVolume((1f - Game.GAME.volumeslider)/4);
+			Assets.music2.setVolume(Game.GAME.volumeslider/2);
+			Game.GAME.volumeslider -= 0.01;
+		}
+		
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
@@ -100,12 +106,12 @@ public class MenuScreen extends Screen {
 		if(keycode == Input.Keys.SPACE) {
 			if(selection == 0) {
 				if(Game.LEVEL!=null) {
-					Assets.sound.play();
+					Assets.ding.play();
 					Game.changeScreen(Game.LEVEL);
 				}
 			}
 			if(selection == 1) {
-				Assets.sound.play();
+				Assets.ding.play();
 				if(Game.LEVEL!=null) {
 					Game.LEVEL.dispose();
 				}
@@ -113,11 +119,11 @@ public class MenuScreen extends Screen {
 				Game.changeScreen(Game.LEVEL);
 			}
 			if(selection == 2) {
-				Assets.sound.play();
+				Assets.ding.play();
 				Game.changeScreen(new AboutScreen());
 			}
 			if(selection == 3) {
-				Assets.sound.play();
+				Assets.ding.play();
 				Gdx.app.exit();
 			}
 			return true;

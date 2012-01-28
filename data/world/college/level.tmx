@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><map height="30" orientation="orthogonal" tileheight="32" tilewidth="32" version="1.0" width="40"><properties><property name="blended tiles" value="15"/></properties>
+ <tileset firstgid="1" name="tiles" tileheight="32" tilewidth="32">
+  <image height="192" source="tiles.png" width="96"/>
+ </tileset>
+ <layer height="30" name="Background" width="40">
+  <data compression="zlib" encoding="base64">
+   eJztlt0KgCAMRmcQGtL7v2540U21zbTmhO/igD+Ix6nTQEQBADA1O1PW+ixIDcDv7rdUAD/4SUi54alu5ddz/yz9soLk92d+KWO2ivXHCf1a5npzB0b4aWcUfvy+efVLBL+RfoVVoef9PGPQki+9/y+5dmuXWfyu50Dyiw5i6C1+X/kdp3sLUg==
+  </data>
+ </layer>
+ <layer height="30" name="Solid" width="40">
+  <data compression="zlib" encoding="base64">
+   eJztlksKwCAMRIXse//jdlOptPGXoVPQGQgIanyJJpiShOgATXziQ/nsGpszrs0x+aL7xLcvH1p3aA2uxjfSG7z+gPJ9lQPx7cMXOcsa5vln8836F9+9T3zr8tnLky+vphl8LCH1G30XtXiZLNl6/brke/5XWDkr1VvzRw5HYxi9B7ZltdacoVQaRw==
+  </data>
+ </layer>
+</map>

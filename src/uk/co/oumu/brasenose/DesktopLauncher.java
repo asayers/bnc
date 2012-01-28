@@ -1,4 +1,4 @@
-package uk.co.oumu.gdxgame;
+package uk.co.oumu.brasenose;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 
