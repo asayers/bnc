@@ -1,4 +1,4 @@
-package uk.co.oumu.brasenose;
+package uk.co.oumu.bnc;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;

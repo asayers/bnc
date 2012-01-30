@@ -1,25 +1,23 @@
-package uk.co.oumu.brasenose.screens;
+package uk.co.oumu.bnc.screens;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import uk.co.oumu.brasenose.Assets;
-import uk.co.oumu.brasenose.Game;
-import uk.co.oumu.brasenose.entities.NPC;
-import uk.co.oumu.brasenose.entities.Player;
+import uk.co.oumu.bnc.Assets;
+import uk.co.oumu.bnc.Game;
+import uk.co.oumu.bnc.entities.NPC;
+import uk.co.oumu.bnc.entities.Player;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.tiled.TileAtlas;
 import com.badlogic.gdx.graphics.g2d.tiled.TileMapRenderer;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledLoader;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledMap;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledObject;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
@@ -32,8 +30,6 @@ public class LevelScreen extends Screen {
 	public Player player;
 	public Actor[][] actors;
 
-	public SpriteBatch batch = new SpriteBatch();
-	public OrthographicCamera camera;
 	private FileHandle tiledir;
 	private FileHandle mapfile;
 	public TiledMap map;
@@ -53,8 +49,9 @@ public class LevelScreen extends Screen {
 		tileMapRenderer = new TileMapRenderer(map, tileAtlas, 16, 16);
 		
 		// Prepare the camera
-		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		camera.position.set(0, 0, 0);
+		Game.GAME_CAM = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		Game.GAME_CAM.position.set(0, 0, 0);
+		Game.GAME_CAM.zoom = Game.ZOOM;
 		
 		width = map.width;
 		height = map.height;
@@ -116,10 +113,6 @@ public class LevelScreen extends Screen {
 		
 		// Call act() for all actors
 		stage.act(Gdx.graphics.getDeltaTime());
-		
-		// Sync the map and stage cameras
-		Vector3 translation = new Vector3(camera.position.x+16 - stage.getCamera().position.x, camera.position.y+16 - stage.getCamera().position.y, 0);
-		stage.getCamera().translate(translation.x, translation.y, translation.z);
 	}
 	
 	public void draw() {
@@ -127,18 +120,20 @@ public class LevelScreen extends Screen {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
+		// Update the camera
+		Game.GAME_CAM.update();
+
 		// Render the map
-		camera.update();
-		tileMapRenderer.getProjectionMatrix().set(camera.combined);
-		tileMapRenderer.render(camera);
+		tileMapRenderer.render(Game.GAME_CAM);
 		
 		// Draw the actors
+		stage.setCamera(Game.GAME_CAM);
 		stage.draw();
         
 		// Other stuff (UI, debug)
-        batch.begin();
-        Assets.font.draw(batch, "x:"+player.x+"; y:"+player.y+"; fps:"+Gdx.graphics.getFramesPerSecond(),0,16);
-        batch.end();
+		Game.BATCH.begin();
+        Assets.font.draw(Game.BATCH, "x:"+player.x+"; y:"+player.y+"; fps:"+Gdx.graphics.getFramesPerSecond(),-Game.WIDTH/2 + 4,-Game.HEIGHT/2 + 16);
+        Game.BATCH.end();
 	}
 	
 	@Override
@@ -158,6 +153,17 @@ public class LevelScreen extends Screen {
 		if(keycode == Input.Keys.ESCAPE) {
 			Assets.ding.play();
 			Game.changeScreen(Game.MENU);
+			return true;
+		}
+		
+		if(keycode == Input.Keys.PLUS) {
+			Game.ZOOM /= 2;
+			Game.updateCameras();
+			return true;
+		}
+		if(keycode == Input.Keys.MINUS) {
+			Game.ZOOM *= 2;
+			Game.updateCameras();
 			return true;
 		}
 		

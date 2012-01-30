@@ -1,14 +1,13 @@
-package uk.co.oumu.brasenose.screens;
+package uk.co.oumu.bnc.screens;
 
-import uk.co.oumu.brasenose.Assets;
-import uk.co.oumu.brasenose.Game;
+import uk.co.oumu.bnc.Assets;
+import uk.co.oumu.bnc.Game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class MessageOverlay extends Screen {
 	
-	private SpriteBatch batch = new SpriteBatch();
+	private SpriteBatch batch = Game.BATCH;
 	private String text;
 	
 	public MessageOverlay(String message) {
@@ -20,12 +19,12 @@ public class MessageOverlay extends Screen {
 //		float w = Assets.font.getMultiLineBounds(text).width;
 //		float h = Assets.font.getMultiLineBounds(text).height;
 		
-		batch.draw(Assets.textbox, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()/3);
+		batch.draw(Assets.textbox, -Game.WIDTH/2, -Game.HEIGHT/2, Game.WIDTH, Game.HEIGHT/3);
 		
 		// TODO: Get the text to wrap
 		Assets.font.setColor(0,0,0,1);
 		Assets.font.setScale(1);
-		Assets.font.drawMultiLine(batch, text, 16, Gdx.graphics.getHeight()/3 - 16);
+		Assets.font.drawMultiLine(batch, text, -Game.WIDTH/2 + 16, -Game.HEIGHT/6 - 16);
 	}
 	
 	

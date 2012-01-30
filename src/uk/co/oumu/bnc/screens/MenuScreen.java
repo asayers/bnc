@@ -1,8 +1,8 @@
-package uk.co.oumu.brasenose.screens;
+package uk.co.oumu.bnc.screens;
 
-import uk.co.oumu.brasenose.Assets;
-import uk.co.oumu.brasenose.Game;
-import uk.co.oumu.brasenose.Levels.CollegeLevel;
+import uk.co.oumu.bnc.Assets;
+import uk.co.oumu.bnc.Game;
+import uk.co.oumu.bnc.levels.CollegeLevel;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -11,13 +11,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class MenuScreen extends Screen {
 	
-	private SpriteBatch batch = new SpriteBatch();
+	private SpriteBatch batch = Game.BATCH;
 	private String[] menuitems = {"Continue", "New game","About","Exit"};
 	private int selection = 1;
 	
 	public void drawTitle() {
-		int x = (int)(Gdx.graphics.getWidth()-Assets.logo.getRegionWidth())/2;
-		int y = (int)(Gdx.graphics.getHeight()-Assets.logo.getRegionHeight())*3/4;
+		int x = (int)-(Assets.logo.getRegionWidth()/2);
+//		int y = (int)(Assets.logo.getRegionHeight()/8);
+		int y = -16;
 		batch.draw(Assets.logo, x, y);
 	}
 
@@ -32,8 +33,8 @@ public class MenuScreen extends Screen {
 			menutext = menutext.concat(menuitems[i]+"\n");
 		}
 		
-		int x = (int)(Gdx.graphics.getWidth()-Assets.font.getMultiLineBounds(menutext).width)/2;
-		int y = (int)(Gdx.graphics.getHeight()-Assets.font.getMultiLineBounds(menutext).height)*3/7;
+		int x = (int)-(Assets.font.getMultiLineBounds(menutext).width/2);
+		int y = (int)-(Assets.font.getMultiLineBounds(menutext).height*2/3);
 		Assets.font.setColor(0,0,0,1);
 		Assets.font.setScale(1);
 		Assets.font.drawMultiLine(batch, menutext, x, y);
@@ -83,7 +84,7 @@ public class MenuScreen extends Screen {
 		batch.begin();
 		drawTitle();
 		drawMenu();
-		Assets.font.draw(batch, "s:"+selection+";l:"+Game.LEVEL,0,16);
+		Assets.font.draw(batch, "s:"+selection+";l:"+Game.LEVEL,-Game.WIDTH/2 + 4,-Game.HEIGHT/2 + 16);
 		batch.end();
 	}
 
@@ -142,6 +143,18 @@ public class MenuScreen extends Screen {
 			selectionDown();
 			return true;
 		}
+		
+		if(keycode == Input.Keys.PLUS) {
+			Game.ZOOM /= 2;
+			Game.updateCameras();
+			return true;
+		}
+		if(keycode == Input.Keys.MINUS) {
+			Game.ZOOM *= 2;
+			Game.updateCameras();
+			return true;
+		}
+		
 		return false;
 	}
 }

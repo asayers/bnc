@@ -1,7 +1,7 @@
-package uk.co.oumu.brasenose.screens;
+package uk.co.oumu.bnc.screens;
 
-import uk.co.oumu.brasenose.Assets;
-import uk.co.oumu.brasenose.Game;
+import uk.co.oumu.bnc.Assets;
+import uk.co.oumu.bnc.Game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

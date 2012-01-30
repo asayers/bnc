@@ -1,4 +1,4 @@
-package uk.co.oumu.brasenose.screens;
+package uk.co.oumu.bnc.screens;
 
 import com.badlogic.gdx.InputProcessor;
 

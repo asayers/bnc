@@ -1,6 +1,6 @@
-package uk.co.oumu.brasenose.Levels;
+package uk.co.oumu.bnc.levels;
 
-import uk.co.oumu.brasenose.screens.LevelScreen;
+import uk.co.oumu.bnc.screens.LevelScreen;
 
 public class CollegeLevel extends LevelScreen {
 

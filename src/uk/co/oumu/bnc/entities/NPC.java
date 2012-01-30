@@ -1,41 +1,39 @@
-package uk.co.oumu.brasenose.entities;
+package uk.co.oumu.bnc.entities;
 
-import uk.co.oumu.brasenose.Assets;
-import uk.co.oumu.brasenose.Game;
+import uk.co.oumu.bnc.Assets;
+import uk.co.oumu.bnc.Game;
+import uk.co.oumu.bnc.screens.MessageOverlay;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public class Player extends Actor {
-	// TODO: make player extend NPC, offload some code to NPC class
+public class NPC extends Actor {
 	
 	private int i;
 	private int j;
 	private int spr_i;
 	private int spr_j;
 	private Sprite sprite;
-	private int direction = 2;
 	private int speed = 5;
+	private int direction = 2;
 	private int walking = 0;
+	private String dialogue;
 	
-	public Player(String name, int i, int j, int spr_i, int spr_j) {
+	public NPC(String name, int i, int j, int spr_i, int spr_j, String dialogue) {
 		super(name);
 		
 		if(Game.LEVEL.actors[i][j] == null) {
 			Game.LEVEL.actors[i][j] = this;
 		} else {
-			Game.LEVEL.actors[i][j].markToRemove(true);
-			Game.LEVEL.actors[i][j] = this;
+			markToRemove(true);
 		}
 		
 		this.i = i;
 		this.j = j;
 		this.x = i*32;
 		this.y = j*32;
+		this.direction = 2;
 		this.spr_i = spr_i*2;
 		this.spr_j = spr_j*4;
 		setSprite();
@@ -43,6 +41,8 @@ public class Player extends Actor {
 		this.height = sprite.getHeight();
 		this.originX = sprite.getOriginX();
 		this.originY = sprite.getOriginY();
+		this.dialogue = dialogue;
+		// TODO: make `wandering' a configurable attribute
 	}
 	
 	public void setSprite() {
@@ -60,7 +60,7 @@ public class Player extends Actor {
 	
 	@Override
 	public void act(float delta) {
-		
+
 		if(walking > 0) {
 			if(x<i*32) x = i*32 - 32*walking*speed/100;
 			if(x>i*32) x = i*32 + 32*walking*speed/100;
@@ -71,7 +71,8 @@ public class Player extends Actor {
 			x = i*32;
 			y = j*32;
 			
-			if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
+			double rand = Math.random()*5/delta;
+			if(rand < 0.25) {
 				if(checkFree(i,j+1)) {
 					Game.LEVEL.actors[i][j] = null;
 					j++;
@@ -79,7 +80,7 @@ public class Player extends Actor {
 				}
 				walking = 100/speed;
 				direction = 0;
-			} else if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+			} else if(rand < 0.5) {
 				if(checkFree(i,j-1)) {
 					Game.LEVEL.actors[i][j] = null;
 					j--;
@@ -87,7 +88,7 @@ public class Player extends Actor {
 				}
 				walking = 100/speed;
 				direction = 2;
-			} else if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+			} else if(rand < 0.75) {
 				if(checkFree(i-1,j)) {
 					Game.LEVEL.actors[i][j] = null;
 					i--;
@@ -95,7 +96,7 @@ public class Player extends Actor {
 				}
 				walking = 100/speed;
 				direction = 3;
-			} else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+			} else if(rand < 1) {
 				if(checkFree(i+1,j)) {
 					Game.LEVEL.actors[i][j] = null;
 					i++;
@@ -107,9 +108,6 @@ public class Player extends Actor {
 		}
 		
 		setSprite();
-		
-		Vector3 translation = new Vector3(x - (Game.LEVEL.stage.getCamera().position.x), y - (Game.LEVEL.stage.getCamera().position.y), 0);
-		Game.LEVEL.camera.translate(translation.x, translation.y, translation.z);
 	}
 	
 	public boolean checkFree(int i, int j) {
@@ -128,42 +126,20 @@ public class Player extends Actor {
 
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
-		sprite.setPosition(x+16, y+16);
+		sprite.setPosition(x, y);
 		sprite.draw(batch);
 	}
 	
 	@Override
 	public boolean keyDown(int keycode) {
-		if(keycode == Input.Keys.SPACE) {
-			int ti = i;
-			int tj = j;
-			
-			if(direction == 0) {
-				ti=i;
-				tj=j+1;
-			}
-			if(direction == 1) {
-				ti=i+1;
-				tj=j;
-			}
-			if(direction == 2) {
-				ti=i;
-				tj=j-1;
-			}
-			if(direction == 3) {
-				ti=i-1;
-				tj=j;
-			}
-			
-			// If the target grid square contains an actor, perform actor.keyDown()
-			if(!(ti<0) && !(tj<0) && !(ti+1>Game.LEVEL.width) && !(tj+1>Game.LEVEL.height)) {
-				if(Game.LEVEL.actors[ti][tj] != null) {
-					return Game.LEVEL.actors[ti][tj].keyDown((direction+2)%4);
-				}
-			}
-		}
 		
-		return false;
+		direction = keycode;
+		setSprite();
+		Game.LEVEL.draw();
+		
+		Assets.ding.play();
+		Game.changeScreen(new MessageOverlay(dialogue));
+		return true;
 	}
 
 	@Override
