@@ -108,7 +108,7 @@ public class Player extends Actor {
 		
 		setSprite();
 		
-		Vector3 translation = new Vector3(x - (Game.LEVEL.stage.getCamera().position.x), y - (Game.LEVEL.stage.getCamera().position.y), 0);
+		Vector3 translation = new Vector3(x+16 - (Game.LEVEL.stage.getCamera().position.x), y+16 - (Game.LEVEL.stage.getCamera().position.y), 0);
 		Game.GAME_CAM.translate(translation.x, translation.y, translation.z);
 	}
 	
