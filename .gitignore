@@ -5,3 +5,5 @@ dist/*
 .project
 .settings/*
 site_
+bnc.jar
+bnc.zip

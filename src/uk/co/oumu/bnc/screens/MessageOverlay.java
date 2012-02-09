@@ -3,6 +3,7 @@ package uk.co.oumu.bnc.screens;
 import uk.co.oumu.bnc.Assets;
 import uk.co.oumu.bnc.Game;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class MessageOverlay extends Screen {
@@ -53,8 +54,10 @@ public class MessageOverlay extends Screen {
 		
 		// TODO: remove a string from the message array, change the screen to another MessageOverlay with the new array; back to LEVEL is the limiting case.
 		
-		Assets.ding.play();
-		Game.changeScreen(Game.LEVEL);
+		if(keycode == Input.Keys.SPACE) {
+			Assets.ding.play();
+			Game.changeScreen(Game.LEVEL);
+		}
 
 		return true;
 	}
