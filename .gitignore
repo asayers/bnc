@@ -1,6 +1,6 @@
-bin/*
-res/*
-dist/*
+bin
+res
+dist
 .classpath
 .project
 .settings/*
