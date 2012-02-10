@@ -17,8 +17,7 @@ public class MenuScreen extends Screen {
 	
 	public void drawTitle() {
 		int x = (int)-(Assets.logo.getRegionWidth()/2);
-//		int y = (int)(Assets.logo.getRegionHeight()/8);
-		int y = -16;
+		int y = -32;
 		batch.draw(Assets.logo, x, y);
 	}
 
@@ -131,6 +130,7 @@ public class MenuScreen extends Screen {
 			return true;
 		}
 		if(keycode == Input.Keys.ESCAPE) {
+			// TODO: Gonna want to remove this eventually
 			Gdx.app.exit();
 			return true;
 		}

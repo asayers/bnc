@@ -15,7 +15,7 @@
  <objectgroup height="30" name="NPCs" width="40">
   <object name="Jing" type="NPC" x="1007" y="814">
    <properties>
-    <property name="dialogue" value="Hello, and welcome to Brasenose College!\nMany great adventures await you!"/>
+    <property name="dialogue" value="Hello, and welcome to Brasenose College! Many great adventures await you!"/>
    </properties>
   </object>
   <object name="Ned" type="NPC" x="910" y="719"/>

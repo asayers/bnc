@@ -4,11 +4,9 @@ import uk.co.oumu.bnc.Assets;
 import uk.co.oumu.bnc.Game;
 
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class MessageOverlay extends Screen {
 	
-	private SpriteBatch batch = Game.BATCH;
 	private String text;
 	
 	public MessageOverlay(String message) {
@@ -17,15 +15,11 @@ public class MessageOverlay extends Screen {
 	}
 	
 	public void drawText() {
-//		float w = Assets.font.getMultiLineBounds(text).width;
-//		float h = Assets.font.getMultiLineBounds(text).height;
+		Game.BATCH.draw(Assets.textbox, -Game.WIDTH/2, -Game.HEIGHT/2, Game.WIDTH, Game.HEIGHT/3);
 		
-		batch.draw(Assets.textbox, -Game.WIDTH/2, -Game.HEIGHT/2, Game.WIDTH, Game.HEIGHT/3);
-		
-		// TODO: Get the text to wrap
 		Assets.font.setColor(0,0,0,1);
 		Assets.font.setScale(1);
-		Assets.font.drawMultiLine(batch, text, -Game.WIDTH/2 + 16, -Game.HEIGHT/6 - 16);
+		Assets.font.drawWrapped(Game.BATCH, text, -Game.WIDTH/2 + 16, -Game.HEIGHT/6 - 16, Game.WIDTH - 32);
 	}
 	
 	
@@ -37,9 +31,9 @@ public class MessageOverlay extends Screen {
 
 	@Override
 	public void render(float delta) {
-		batch.begin();
+		Game.BATCH.begin();
 		drawText();
-		batch.end();
+		Game.BATCH.end();
 	}
 	
 	@Override
@@ -54,7 +48,7 @@ public class MessageOverlay extends Screen {
 		
 		// TODO: remove a string from the message array, change the screen to another MessageOverlay with the new array; back to LEVEL is the limiting case.
 		
-		if(keycode == Input.Keys.SPACE) {
+		if(keycode == Input.Keys.SPACE || keycode == Input.Keys.ESCAPE) {
 			Assets.ding.play();
 			Game.changeScreen(Game.LEVEL);
 		}
