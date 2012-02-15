@@ -2,7 +2,6 @@ bin
 res
 dist
 .classpath
-.project
 .settings/*
 site_
 bnc.jar
