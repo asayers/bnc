@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="7" height="5" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="blended tiles" value="15"/>
+ </properties>
+ <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32">
+  <image source="tiles.png" width="96" height="192"/>
+ </tileset>
+ <layer name="Background" width="7" height="5">
+  <data encoding="base64" compression="zlib">
+   eJxjYGBg4MCBGciU4yRTDgBFIAED
+  </data>
+ </layer>
+ <layer name="Solid" width="7" height="5">
+  <data encoding="base64" compression="zlib">
+   eJxjYGBgYMaBCQEBJCyIxCYFCCFhACWcAKo=
+  </data>
+ </layer>
+ <objectgroup name="Objects" width="7" height="5">
+  <object name="Andy" type="NPC" x="80" y="51"/>
+  <object name="college" type="Portal" x="16" y="113">
+   <properties>
+    <property name="destx" value="32"/>
+    <property name="desty" value="2"/>
+   </properties>
+  </object>
+  <object name="Alex" type="Player" x="52" y="113"/>
+  <object name="college" type="Portal" x="17" y="142">
+   <properties>
+    <property name="destx" value="32"/>
+    <property name="desty" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

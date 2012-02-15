@@ -13,12 +13,12 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class Player extends Actor {
 	// TODO: make player extend NPC, offload some code to NPC class
 	
-	private int i;
-	private int j;
+	public int i;
+	public int j;
 	private int spr_i;
 	private int spr_j;
 	private Sprite sprite;
-	private int direction = 2;
+	public int direction = 2;
 	private int speed = 5;
 	private int walking = 0;
 	
@@ -62,12 +62,21 @@ public class Player extends Actor {
 	public void act(float delta) {
 		
 		if(walking > 0) {
+			// This code gets called every frame while the player is moving between grid squares
 			if(x<i*32) x = i*32 - 32*walking*speed/100;
 			if(x>i*32) x = i*32 + 32*walking*speed/100;
 			if(y<j*32) y = j*32 - 32*walking*speed/100;
 			if(y>j*32) y = j*32 + 32*walking*speed/100;
 			walking -= delta;
+			
+			if(walking <= 0) {
+				// This code gets called once, when the player arrives in the grid square
+				if(Game.LEVEL.interactors[i][j] != null) {
+					Game.LEVEL.interactors[i][j].act();
+				}
+			}
 		} else {
+			// This code is called every frame while the player is standing still
 			x = i*32;
 			y = j*32;
 			
@@ -117,6 +126,9 @@ public class Player extends Actor {
 			return false;
 		}
 		if(Game.LEVEL.map.layers.get(1).tiles[Game.LEVEL.height-1-j][i] != 0) {
+			return false;
+		}
+		if(Game.LEVEL.map.layers.get(0).tiles[Game.LEVEL.height-1-j][i] == 0) {
 			return false;
 		}
 		if(Game.LEVEL.actors[i][j] != null) {

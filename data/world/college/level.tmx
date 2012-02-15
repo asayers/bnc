@@ -1,18 +1,22 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><map height="30" orientation="orthogonal" tileheight="32" tilewidth="32" version="1.0" width="40"><properties><property name="blended tiles" value="15"/></properties>
- <tileset firstgid="1" name="tiles" tileheight="32" tilewidth="32">
-  <image height="192" source="tiles.png" width="96"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="30" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="blended tiles" value="15"/>
+ </properties>
+ <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32">
+  <image source="tiles.png" width="96" height="192"/>
  </tileset>
- <layer height="30" name="Background" width="40">
-  <data compression="zlib" encoding="base64">
+ <layer name="Background" width="40" height="30">
+  <data encoding="base64" compression="zlib">
    eJztltEKgCAMRWcgGtH//2740EvlZrPmhPtwQBHxOOc0EFEAAEzNXmlLYxZkBfC7+y0NwA9+HFxteOpb+fXcP0u/TYDz+7O+lDlrw/7ThH6atd7cgRF+Uo7Cr35uXv0ywW+kXyEK9LyfZww09dLz/zIy+7V24fLCk981Dzi/5CCG3uL3ld8Bn0cLTw==
   </data>
  </layer>
- <layer height="30" name="Solid" width="40">
-  <data compression="zlib" encoding="base64">
+ <layer name="Solid" width="40" height="30">
+  <data encoding="base64" compression="zlib">
    eJztluEKwCAIhAP/7/0fd38Wi83KeXSD7Q6EoLJPM6kUCdEGmvjEh/LZMTZn3Jtj8mX3iW8dH1rXaI2Lj8sX6Q1ef0D5VuVAfP/hy5xlA/P8s/me+hffuU983+Wzmydf3ptm8LGEvN9sXfTiZbJUm/Xrlu/6X2HlrNVszRs5jMYQvQe2VY3W7BV/G0M=
   </data>
  </layer>
- <objectgroup height="30" name="NPCs" width="40">
+ <objectgroup name="NPCs" width="40" height="30">
   <object name="Jing" type="NPC" x="1007" y="814">
    <properties>
     <property name="dialogue" value="Hello, and welcome to Brasenose College! Many great adventures await you!"/>
@@ -20,5 +24,6 @@
   </object>
   <object name="Ned" type="NPC" x="910" y="719"/>
   <object name="Alex" type="Player" x="1008" y="911"/>
+  <object name="lodge" type="Portal" x="1073" y="879"/>
  </objectgroup>
 </map>

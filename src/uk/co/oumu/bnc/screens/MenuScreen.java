@@ -2,7 +2,6 @@ package uk.co.oumu.bnc.screens;
 
 import uk.co.oumu.bnc.Assets;
 import uk.co.oumu.bnc.Game;
-import uk.co.oumu.bnc.levels.CollegeLevel;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -113,11 +112,7 @@ public class MenuScreen extends Screen {
 			}
 			if(selection == 1) {
 				Assets.ding.play();
-				if(Game.LEVEL!=null) {
-					Game.LEVEL.dispose();
-				}
-				Game.LEVEL = new CollegeLevel();
-				Game.changeScreen(Game.LEVEL);
+				Game.changeLevel("college");
 			}
 			if(selection == 2) {
 				Assets.ding.play();

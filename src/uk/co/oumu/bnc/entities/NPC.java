@@ -117,6 +117,9 @@ public class NPC extends Actor {
 		if(Game.LEVEL.map.layers.get(1).tiles[Game.LEVEL.height-1-j][i] != 0) {
 			return false;
 		}
+		if(Game.LEVEL.map.layers.get(0).tiles[Game.LEVEL.height-1-j][i] == 0) {
+			return false;
+		}
 		if(Game.LEVEL.actors[i][j] != null) {
 			return false;
 		}

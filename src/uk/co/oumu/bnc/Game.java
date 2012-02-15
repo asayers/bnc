@@ -1,5 +1,7 @@
 package uk.co.oumu.bnc;
 
+import uk.co.oumu.bnc.levels.CollegeLevel;
+import uk.co.oumu.bnc.levels.LodgeLevel;
 import uk.co.oumu.bnc.screens.LevelScreen;
 import uk.co.oumu.bnc.screens.MenuScreen;
 import uk.co.oumu.bnc.screens.Screen;
@@ -20,6 +22,13 @@ public class Game extends com.badlogic.gdx.Game {
 	public static int WIDTH;
 	public static int HEIGHT;
 	public float volumeslider = 0;
+	
+	public static void changeLevel(String levelname) {
+		if(levelname.equals("college")) LEVEL = new CollegeLevel();
+		if(levelname.equals("lodge")) LEVEL = new LodgeLevel();
+		LEVEL.create();
+		changeScreen(LEVEL);
+	}
 	
 	public static void changeScreen(Screen screen) {
 		GAME.setScreen(screen);

@@ -4,8 +4,8 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 
 public class DesktopLauncher {
 	
-	public static final int TILES_H = 11;
-	public static final int TILES_V = 7;
+	public static final int TILES_H = 13;
+	public static final int TILES_V = 9;
 	public static final float ZOOM = 0.5f;
 	
 	public static void main(String[] args) {

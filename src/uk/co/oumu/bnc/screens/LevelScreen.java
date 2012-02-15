@@ -5,8 +5,10 @@ import java.util.HashMap;
 
 import uk.co.oumu.bnc.Assets;
 import uk.co.oumu.bnc.Game;
+import uk.co.oumu.bnc.entities.Interactor;
 import uk.co.oumu.bnc.entities.NPC;
 import uk.co.oumu.bnc.entities.Player;
+import uk.co.oumu.bnc.entities.Portal;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -29,6 +31,7 @@ public class LevelScreen extends Screen {
 	public Stage stage;
 	public Player player;
 	public Actor[][] actors;
+	public Interactor[][] interactors;
 
 	private FileHandle tiledir;
 	private FileHandle mapfile;
@@ -38,9 +41,10 @@ public class LevelScreen extends Screen {
 
 	
 	public LevelScreen(String name) {
-		Game.LEVEL = this;
 		this.name = name;
-		
+	}
+
+	public void create() {
 		// Load the map
 		tiledir = Gdx.files.internal("data/world/"+name+"/");
 		mapfile = Gdx.files.internal("data/world/"+name+"/level.tmx");
@@ -61,37 +65,46 @@ public class LevelScreen extends Screen {
 		stage = new Stage(width*32, height*32, false);
 		stage.setViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
 		actors = new Actor[width][height];
+		interactors = new Interactor[width][height];
 		
 		// Populate the stage
-		ArrayList<TiledObject> npcs = map.objectGroups.get(0).objects;
-		int x;
-		int y;
-		String npcname;
-		HashMap<String,String> properties;
-		for(int i = 0; i < npcs.size(); i++) {
-			x = (int) Math.floor(npcs.get(i).x/32);
-			y = (int) (height - 1 - Math.floor(npcs.get(i).y/32));
-			npcname = npcs.get(i).name;
-			properties = npcs.get(i).properties;
+		ArrayList<TiledObject> objects = map.objectGroups.get(0).objects;
+		
+		String objname;
+		HashMap<String,String> objproperties;
+		int obji;
+		int objj;
+		
+		for(int i = 0; i < objects.size(); i++) {
+			obji = (int) Math.floor(objects.get(i).x/32);
+			objj = (int) (height - 1 - Math.floor(objects.get(i).y/32));
+			objname = objects.get(i).name;
+			objproperties = objects.get(i).properties;
 			
-			if(npcs.get(i).type.equals("Player") && player == null) {
-				player = new Player(npcname, x, y, 15, 2);
+			if(objects.get(i).type.equals("Player") && player == null) {
+				player = new Player(objname, obji, objj, 15, 2);
 				stage.addActor(player);
 			}
-			if(npcs.get(i).type.equals("NPC")) {
-				String dialogue;
-				if(properties.get("dialogue") != null) {
-					dialogue = properties.get("dialogue");
-				} else {
+			if(objects.get(i).type.equals("NPC")) {
+				String dialogue = objproperties.get("dialogue");
+				if(dialogue == null) {
 					dialogue = "Default dialogue!";
 				}
-				stage.addActor(new NPC(npcname, x, y, 0, 0, dialogue));
+				stage.addActor(new NPC(objname, obji, objj, 0, 0, dialogue));
+			}
+			if(objects.get(i).type.equals("Portal")) {
+				if(objproperties.get("destx") == null && objproperties.get("desty") == null) {
+					interactors[obji][objj] = new Portal(objname);
+				} else {
+					int desti = Integer.parseInt(objproperties.get("destx"));
+					int destj = Integer.parseInt(objproperties.get("desty"));
+					interactors[obji][objj] = new Portal(objname, desti, destj);
+				}
 			}
 		}
-		
-		// TODO: add Door object, create instances from an objectgroup, add collision event.
 	}
-
+	
+	
 	@Override
 	public void resize(int width, int height) {
 		// This is necessary to support window resizing, but it also resets the camera position all the time...
@@ -101,7 +114,11 @@ public class LevelScreen extends Screen {
 	@Override
 	public void render(float delta) {
 		act(delta);
-		draw();		
+		draw();
+		
+		if(Game.LEVEL != this) {
+			dispose();
+		}
 	}
 	
 	public void act(float delta) {
@@ -132,7 +149,7 @@ public class LevelScreen extends Screen {
         
 		// Other stuff (UI, debug)
 		Game.BATCH.begin();
-        Assets.font.draw(Game.BATCH, "x:"+player.x+"; y:"+player.y+"; fps:"+Gdx.graphics.getFramesPerSecond(),-Game.WIDTH/2 + 4,-Game.HEIGHT/2 + 16);
+        Assets.font.draw(Game.BATCH, "("+player.i+","+player.j+"); fps:"+Gdx.graphics.getFramesPerSecond(),-Game.WIDTH/2 + 4,-Game.HEIGHT/2 + 16);
         Game.BATCH.end();
 	}
 	
