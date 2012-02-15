@@ -77,7 +77,7 @@
     <target depends="create_run_jar" name="zip">
 	<zip destfile="dist/bnc.zip">
     		<zipfileset dir="data" prefix="data"/>
-    		<zipfileset dir="." includes="bnc.jar"/>
+    		<zipfileset dir="." includes="dist/bnc.jar"/>
 	</zip>
 
     </target>
