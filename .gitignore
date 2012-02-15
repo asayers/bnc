@@ -1,8 +1,5 @@
 bin
 res
 dist
-.classpath
 .settings/*
 site_
-bnc.jar
-bnc.zip

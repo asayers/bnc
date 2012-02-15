@@ -2,7 +2,7 @@
 
 <project basedir="." default="zip" name="bnc">
     <property environment="env"/>
-    <property name="ECLIPSE_HOME" value="../../../../usr/share/eclipse"/>
+    <property name="ECLIPSE_HOME" value="/usr/share/eclipse"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.6"/>
     <property name="source" value="1.6"/>
@@ -58,24 +58,24 @@
     </target>
 
     <target depends="build" name="create_run_jar">
-        <jar destfile="/home/alex/workspace/bnc/bnc.jar" filesetmanifest="mergewithoutmain">
+        <jar destfile="dist/bnc.jar" filesetmanifest="mergewithoutmain">
             <manifest>
                 <attribute name="Main-Class" value="uk.co.oumu.bnc.DesktopLauncher"/>
                 <attribute name="Class-Path" value="."/>
             </manifest>
-            <fileset dir="/home/alex/workspace/bnc/bin"/>
-            <zipfileset excludes="META-INF/*.SF" src="/home/alex/workspace/bnc/libs/gdx-backend-lwjgl-natives.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="/home/alex/workspace/bnc/libs/gdx-backend-lwjgl-sources.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="/home/alex/workspace/bnc/libs/gdx-backend-lwjgl.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="/home/alex/workspace/bnc/libs/gdx-natives.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="/home/alex/workspace/bnc/libs/gdx-sources.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="/home/alex/workspace/bnc/libs/gdx.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="/home/alex/workspace/bnc/libs/sqlitejdbc-v056-native.jar"/>
+            <fileset dir="bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="libs/gdx-backend-lwjgl-natives.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="libs/gdx-backend-lwjgl-sources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="libs/gdx-backend-lwjgl.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="libs/gdx-natives.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="libs/gdx-sources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="libs/gdx.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="libs/sqlitejdbc-v056-native.jar"/>
         </jar>
     </target>
 
     <target depends="create_run_jar" name="zip">
-	<zip destfile="bnc.zip">
+	<zip destfile="dist/bnc.zip">
     		<zipfileset dir="data" prefix="data"/>
     		<zipfileset dir="." includes="bnc.jar"/>
 	</zip>
