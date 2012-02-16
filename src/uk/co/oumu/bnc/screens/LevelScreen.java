@@ -86,6 +86,7 @@ public class LevelScreen extends Screen {
 				stage.addActor(player);
 			}
 			if(objects.get(i).type.equals("NPC")) {
+				// Add spritesheet coords, wandering flag
 				String dialogue = objproperties.get("dialogue");
 				if(dialogue == null) {
 					dialogue = "Default dialogue!";
