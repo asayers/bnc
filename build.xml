@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 
-<project basedir="." default="zip" name="bnc">
+<project basedir="." default="create_run_jar" name="bnc">
     <property environment="env"/>
     <property name="ECLIPSE_HOME" value="/usr/share/eclipse"/>
     <property name="debuglevel" value="source,lines,vars"/>
@@ -64,6 +64,7 @@
                 <attribute name="Class-Path" value="."/>
             </manifest>
             <fileset dir="bin"/>
+	    <fileset dir="." includes="data/"/>
             <zipfileset excludes="META-INF/*.SF" src="libs/gdx-backend-lwjgl-natives.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="libs/gdx-backend-lwjgl-sources.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="libs/gdx-backend-lwjgl.jar"/>
