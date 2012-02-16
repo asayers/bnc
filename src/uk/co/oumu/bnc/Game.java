@@ -48,6 +48,8 @@ public class Game extends com.badlogic.gdx.Game {
 	
 	@Override
 	public void create() {
+		
+		Assets.loadAssets();
 
 		UI_CAM = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 		GAME_CAM = UI_CAM;
@@ -64,5 +66,11 @@ public class Game extends com.badlogic.gdx.Game {
 		
 		Assets.music1.play();
 		Assets.music2.play();
+	}
+	
+	@Override
+	public void dispose() {
+		
+		Assets.disposeAssets();
 	}
 }
